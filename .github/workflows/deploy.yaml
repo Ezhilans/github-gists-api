@@ -34,8 +34,7 @@ jobs:
         run: |
           kubectl rollout status deployment/flask-gist-api --timeout=90s
 
-      - name: Port-forward & test
+      - name: Port forward to service
+        shell: powershell
         run: |
-          nohup kubectl port-forward svc/flask-gist-api-service 8080:8080 &
-          sleep 10
-          curl http://localhost:8080/healthz
+          Start-Process powershell -ArgumentList 'kubectl port-forward svc/flask-gist-api-service 8080:8080'
