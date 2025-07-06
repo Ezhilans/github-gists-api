@@ -34,7 +34,7 @@ def create_app(test_config=None):
 
     # Redis setup (skip if testing)
     if not app.config.get("TESTING", False):
-        r = redis.Redis(host="redis-server", port=6379, decode_responses=True)
+        r = redis.Redis(host="redis", port=6379, decode_responses=True)
     else:
         # Dummy redis mock for testing
         r = DummyRedis()
