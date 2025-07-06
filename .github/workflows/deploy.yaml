@@ -34,7 +34,11 @@ jobs:
         run: |
           kubectl rollout status deployment/flask-gist-api --timeout=90s
 
-      - name: Port-forward Flask service (Windows)
+      - name: Port forward and run tests
         shell: powershell
         run: |
-          Start-Process -NoNewWindow -FilePath "kubectl" -ArgumentList "port-forward", "svc/flask-gist-api", "8080:80"
+          Start-Job { kubectl port-forward svc/flask-gist-api 8080:80 }
+          Start-Sleep -Seconds 60
+          # Run your test that hits http://localhost:8080
+          curl http://localhost:8080/healthz
+          Get-Job | Stop-Job
