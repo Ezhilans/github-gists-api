@@ -25,4 +25,4 @@ RUN chown -R appuser:appgroup /home/appuser && chmod -R 755 /home/appuser
 
 USER appuser
 EXPOSE 8080
-CMD ["python", "app.py"]
+CMD ["python", "-m", "app"]
