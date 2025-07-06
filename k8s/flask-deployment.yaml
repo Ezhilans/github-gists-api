@@ -6,30 +6,31 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-api
+      app: flask-gist-api
   template:
     metadata:
       labels:
-        app: flask-api
+        app: flask-gist-api
     spec:
       containers:
-        - name: flask-api
+        - name: flask-gist-api
           image: flask-gist-api:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:
-            - name: REDIS_HOST
-              value: "redis-service"
+            - name: FLASK_ENV
+              value: production
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-api-service
+  name: flask-gist-api
 spec:
   selector:
-    app: flask-api
-  type: NodePort
+    app: flask-gist-api
   ports:
-    - port: 8080
+    - protocol: TCP
+      port: 80
       targetPort: 8080
-      nodePort: 30080  # You can change this or let it auto-assign
+  type: LoadBalancer
