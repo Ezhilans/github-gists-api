@@ -22,7 +22,7 @@ spec:
             - name: FLASK_ENV
               value: production
             - name: REDIS_HOST
-              value: redis-server
+              value: redis
           readinessProbe:
             httpGet:
               path: /healthz
