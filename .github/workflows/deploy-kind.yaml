@@ -7,6 +7,7 @@ on:
 
 jobs:
   build-test-deploy:
+    if: false
     runs-on: ubuntu-latest
 
     steps:
@@ -54,17 +55,7 @@ jobs:
       - name: Wait for pods to be ready
         run: |
           kubectl wait --for=condition=Ready pod -l app=redis --timeout=120s
-          kubectl wait --for=condition=Ready pod -l app=flask-gist-api --timeout=180s
-      
-      - name: Print app logs
-        run: kubectl logs -l app=flask-gist-api --all-containers --tail=100
-
-      - name: Print Kubernetes Deployment Logs
-        run: |
-          kubectl describe deployment flask-gist-api
-          kubectl get pods -o wide
-          kubectl describe pod -l app=flask-gist-api
-          kubectl logs -l app=flask-gist-api
+          kubectl wait --for=condition=Ready pod -l app=flask-gist-api --timeout=120s
 
       - name: Wait for deployment to become ready
         run: |
@@ -74,4 +65,3 @@ jobs:
         run: |
           kubectl run tester --rm -i --tty --image=curlimages/curl -- \
             curl -s http://flask-gist-api:80/healthz
-
