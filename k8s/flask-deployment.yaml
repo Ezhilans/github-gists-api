@@ -21,6 +21,8 @@ spec:
           env:
             - name: FLASK_ENV
               value: production
+            - name: REDIS_HOST
+              value: redis-server
           readinessProbe:
             httpGet:
               path: /healthz
@@ -49,4 +51,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
+      nodePort: 30080
   type: LoadBalancer
