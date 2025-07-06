@@ -34,3 +34,7 @@ jobs:
         run: |
           kubectl rollout status deployment/flask-gist-api --timeout=90s
 
+      - name: Port-forward Flask service (Windows)
+        shell: pwsh
+        run: |
+          Start-Process -NoNewWindow -FilePath "kubectl" -ArgumentList "port-forward", "svc/flask-gist-api", "8080:80"
