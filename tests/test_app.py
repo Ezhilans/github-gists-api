@@ -2,7 +2,7 @@ import sys
 import importlib
 import pytest
 import requests_mock
-import app
+import app as app
 import json
 
 from app import create_app
@@ -75,7 +75,7 @@ def test_github_server_error(client):
 
 def test_talisman_missing(monkeypatch):
     monkeypatch.setitem(sys.modules, "flask_talisman", None)
-    import app  # force reimport to re-run top-level import
+    import app as app  # force reimport to re-run top-level import
     importlib.reload(app)
     assert app.Talisman is None
 
