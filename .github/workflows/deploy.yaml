@@ -22,7 +22,7 @@ jobs:
 
       - name: Use Docker environment of Minikube
         run: |
-          eval $(minikube docker-env)
+          minikube docker-env --shell powershell | Invoke-Expression
           docker build -t flask-gist-api:latest .
 
       - name: Apply Kubernetes Manifests
