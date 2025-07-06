@@ -51,12 +51,14 @@ jobs:
       - name: Describe pod (for debugging)
         run: kubectl describe pod -l app=flask-gist-api
 
+      - name: Wait for pods to be ready
+        run: |
+          kubectl wait --for=condition=Ready pod -l app=redis --timeout=120s
+          kubectl wait --for=condition=Ready pod -l app=flask-gist-api --timeout=180s
+      
       - name: Print app logs
         run: kubectl logs -l app=flask-gist-api --all-containers --tail=100
 
-      - name: Wait for pods to be ready
-        run: kubectl wait --for=condition=Ready pod -l app=flask-gist-api --timeout=180s
-      
       - name: Print Kubernetes Deployment Logs
         run: |
           kubectl describe deployment flask-gist-api
