@@ -1,12 +1,12 @@
+from app import create_app
+from unittest.mock import patch, MagicMock
+
 import sys
 import importlib
 import pytest
 import requests_mock
 import app as app
 import json
-
-from app import create_app
-from unittest.mock import patch, MagicMock
 
 @pytest.fixture
 def client():
