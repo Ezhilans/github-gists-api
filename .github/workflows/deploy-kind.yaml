@@ -47,6 +47,12 @@ jobs:
         run: |
           kubectl apply -f k8s/redis-deployment.yaml
           kubectl apply -f k8s/flask-deployment.yaml
+      
+      - name: Describe pod (for debugging)
+        run: kubectl describe pod -l app=flask-gist-api
+
+      - name: Print app logs
+        run: kubectl logs -l app=flask-gist-api --all-containers --tail=100
 
       - name: Wait for pods to be ready
         run: kubectl wait --for=condition=Ready pod -l app=flask-gist-api --timeout=180s
