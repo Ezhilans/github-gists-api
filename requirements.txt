@@ -1,0 +1,8 @@
+Flask
+requests
+redis
+Flask-Talisman
+pytest
+requests-mock
+pytest-cov
+chardet
