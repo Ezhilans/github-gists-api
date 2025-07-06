@@ -20,10 +20,6 @@ class DummyRedis:
     def get(self, k): return None
     def setex(self, *a, **k): pass
 
-def main():
-    app = create_app()
-    app.run(host="0.0.0.0", port=8080, debug=True)
-
 def create_app(test_config=None):
     global r
     app = Flask(__name__)
@@ -87,4 +83,5 @@ def create_app(test_config=None):
     return app
 
 if __name__ == "__main__": # pragma: no cover
-    main()
+    app = create_app()
+    app.run(host="0.0.0.0", port=8080, debug=True)
