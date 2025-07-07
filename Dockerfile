@@ -2,6 +2,8 @@
 FROM python:3.10-slim AS builder
 WORKDIR /app
 
+ENV PATH="/root/.local/bin:$PATH"
+
 COPY requirements.txt .
 RUN apt-get update && apt-get install -y gcc libffi-dev && \
     pip install --user --no-cache-dir -r requirements.txt
