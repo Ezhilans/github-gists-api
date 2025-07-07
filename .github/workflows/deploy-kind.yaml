@@ -63,5 +63,5 @@ jobs:
 
       - name: Test API inside cluster with curl pod
         run: |
-          kubectl run tester --rm -i --tty --image=curlimages/curl -- \
+          kubectl run tester --rm -i --restart=Never --image=curlimages/curl -- \
             curl -s http://flask-gist-api:30080/healthz
