@@ -92,7 +92,7 @@ def test_redis_initialization():
         with patch.dict("os.environ", {}, clear=True):
             app.create_app()
             mock_redis.assert_called_once_with(
-                host="redis-server", port=6379, decode_responses=True
+                host="redis", port=6379, decode_responses=True
             )
 
 
